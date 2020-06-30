@@ -1,6 +1,6 @@
 from sly import Lexer as SlyLexer
 
-commands = ["goto","print","choose","input","set","testequals","check","beq","bne"]
+commands = ["goto","print","choose","input","set","testequals","check","beq","bne","pause"]
 
 class Lexer(SlyLexer):
 	tokens = { STEM, COMMAND, TARGET, STRING, NUMBER, BOOLEAN }
@@ -49,6 +49,7 @@ import sys
 def caller_id():
 	return sys._getframe(2).f_code.co_name
 
+import time
 class Evaluator:
 	def __init__(self): pass
 	def run(self,prog):
@@ -165,6 +166,11 @@ class Evaluator:
 		assert target.value in self.targets, f"Invalid branch target {target.value} at line {target.lineno}!"
 		if self.flag: return
 		self.pos = self.targets[target.value]
+	def command_pause(self):
+		if self.peek().type=="NUMBER":
+			time.sleep(self.next("NUMBER").value)
+		else:
+			input("Press enter to continue.")
 
 if __name__=="__main__":
 	_, file = sys.argv

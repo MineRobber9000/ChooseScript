@@ -1,4 +1,4 @@
-# ChooseScript Specification v0.1.2
+# ChooseScript Specification v0.1.3
 
 ## Abstract
 
@@ -48,6 +48,7 @@ The following literal stems are commands. They MUST NOT be used as targets.
  - `input` - see section 2.4.1
  - `testequals` - see section 2.5
  - `check` - see section 2.5.1
+ - `pause` - see section 2.6
 
 ## 2. Commands
 
@@ -112,6 +113,11 @@ An undefined variable MUST fail all comparisons.
 
 A shorthand for `testequals <STEM> true`. If the variable represented by the 
 argument stem is not a boolean value, an error MUST be thrown.
+
+### 2.6. `pause [<NUMBER>]`
+
+Pause until user presses enter on their keyboard. Alternatively, pause for a 
+number of seconds defined by the argument number.
 
 ## 3. Implementation details
 
