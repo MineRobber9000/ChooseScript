@@ -1,4 +1,4 @@
-# ChooseScript Specification v0.1
+# ChooseScript Specification v0.1.1
 
 ## Abstract
 
@@ -135,12 +135,12 @@ literal `true` and `false`.
 
 The `testequals` and `check` commands test a variable value. If that test 
 succeeds (i.e; the variable is equal to the given value, or the boolean 
-variable is true), the comparison flag MUST be set to true. If the test fails 
-(i.e; the variable is *not* equal to the given value, the boolean variable is 
-false, or the variable is undefined), the comparison flag MUST be set to false.
+variable is true), the comparison flag MUST be set. If the test fails (i.e; the 
+variable is *not* equal to the given value, the boolean variable is false, or 
+the variable is undefined), the comparison flag MUST be cleared.
 
-If the comparison flag is true, then `beq` will branch, and `bne` will allow 
-execution to fall through to the next command. If the comparison flag is false, 
+If the comparison flag is set, then `beq` will branch, and `bne` will allow 
+execution to fall through to the next command. If the comparison flag is clear, 
 the opposite occurs.
 
 The comparison flag MUST start as false.
