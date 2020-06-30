@@ -1,4 +1,4 @@
-# ChooseScript Specification v0.1.1
+# ChooseScript Specification v0.1.2
 
 ## Abstract
 
@@ -22,8 +22,8 @@ There are 6 types of tokens. They are as follows. (Note that each token name
 can be used in a sentence to refer to a token of that type; for instance, a 
 `STEM` token may be referred to as simply "a stem".)
 
- - `STEM` - A stem is defined as "a string of alphanumeric characters, starting 
-with a letter of either case, and without quotes."
+ - `STEM` - A stem is defined as "a string of alphanumeric or underscore 
+characters, starting with a letter of either case, and without quotes."
  - `BOOLEAN` - The literal stems `true` and `false`.
  - `COMMAND` - A command. (See section 1.2 for commands.) All commands are 
 valid stems.

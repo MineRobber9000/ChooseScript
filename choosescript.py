@@ -6,7 +6,7 @@ class Lexer(SlyLexer):
 	tokens = { STEM, COMMAND, TARGET, STRING, NUMBER, BOOLEAN }
 	ignore = ' \t'
 
-	TARGET = r'([A-Za-z][A-Za-z0-9]*):'
+	TARGET = r'([A-Za-z][A-Za-z0-9_]*):'
 
 	def TARGET(self,t):
 		t.value = t.value.strip()[:-1]
@@ -20,7 +20,7 @@ class Lexer(SlyLexer):
 		return t
 
 	COMMAND = '('+'|'.join(commands)+')'
-	STEM = r'([A-Za-z][A-Za-z0-9]*)'
+	STEM = r'([A-Za-z][A-Za-z0-9_]*)'
 
 	@_(r'"(?:[^"\\]|\\.)*"')
 	def STRING(self,t):
@@ -105,7 +105,7 @@ class Evaluator:
 		return s
 	def command_goto(self):
 		target = self.next("STEM")
-		assert target.value in self.targets, "Invalid goto target {target.value} at line {target.lineno}!"
+		assert target.value in self.targets, f"Invalid goto target {target.value} at line {target.lineno}!"
 		self.pos = self.targets[target.value]
 	def command_print(self):
 		val = self.next("STRING").value
@@ -116,7 +116,7 @@ class Evaluator:
 		while self.peek().type=="STRING":
 			label = self.next("STRING")
 			target = self.next("STEM")
-			assert target.value in self.targets, "Invalid goto target {target.value} in choose statement on line {target.lineno}"
+			assert target.value in self.targets, f"Invalid goto target {target.value} in choose statement on line {target.lineno}"
 			choices[label.value]=target.value
 		for i, label in enumerate(choices.keys(),1):
 			print(f"{i}.) {label}")
