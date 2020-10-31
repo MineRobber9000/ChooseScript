@@ -100,9 +100,15 @@ class Evaluator:
 			if t.type=="TARGET":
 				targets[t.value]=i
 		return targets
+	def str(self,value):
+		if value is True:
+			return "true"
+		if value is False:
+			return "false"
+		return str(value)
 	def expand_values(self,s):
 		for key, value in self.values.items():
-			s = s.replace("{{"+key+"}}",str(value))
+			s = s.replace("{{"+key+"}}",self.str(value))
 		return s
 	def command_goto(self):
 		target = self.next("STEM")
